@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Permiso Digital · Crear permiso de viaje de menor</title>
+<link rel="icon" href="assets/favicon-32x32.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Nunito+Sans:opsz,wght@6..12,400;6..12,600;6..12,700;6..12,800&family=Caveat:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/styles.css?v=12">
+</head>
+<body>
+
+<!-- Banda institucional (simple) -->
+<div class="inst-band">
+  <div class="in">
+    <a class="home" href="index.html"><img class="logo-w" src="assets/logo-navbar-white.png" alt="Permiso Digital"></a>
+    <span class="chip">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      Sin registro
+    </span>
+  </div>
+</div>
+
+<div class="wiz">
+
+  <div class="paso-ind">
+    <div class="barra" id="barra"></div>
+    <div class="lab"><b id="paso-titulo">Empresa y sus datos</b><span id="paso-conteo">Paso 1 de 6</span></div>
+  </div>
+
+  <!-- ============ PASO 1 ============ -->
+  <section class="paso card" data-paso="1">
+    <div class="field">
+      <label class="input-label" for="empresa">¿Con qué empresa va a viajar el menor? <span class="req">*</span></label>
+      <select class="input-field" id="empresa">
+        <option value="" disabled selected>Seleccione la empresa...</option>
+        <option value="generica">Genérica (formato base)</option>
+        <option value="copetran">Copetran</option>
+        <option value="brasilia">Expreso Brasilia</option>
+        <option value="berlinas">Berlinas del Fonce</option>
+        <option value="bolivariano">Expreso Bolivariano</option>
+        <option value="ochoa">Rápido Ochoa</option>
+      </select>
+      <div id="empresa-info"></div>
+    </div>
+
+    <hr class="divider">
+    <div class="field-title">Sus datos como quien autoriza</div>
+
+    <div class="field">
+      <label class="input-label">Nombre completo <span class="req">*</span></label>
+      <input class="input-field" type="text" data-k="aut.nombre" placeholder="Nombres y apellidos">
+    </div>
+    <div class="grid-2">
+      <div class="field">
+        <label class="input-label">Tipo de documento <span class="req">*</span></label>
+        <select class="input-field" data-k="aut.tipoDoc">
+          <option value="CC">Cédula de ciudadanía</option><option value="CE">Cédula de extranjería</option>
+          <option value="PA">Pasaporte</option><option value="PP">Permiso de permanencia</option>
+        </select>
+      </div>
+      <div class="field">
+        <label class="input-label">Número de identificación <span class="req">*</span></label>
+        <input class="input-field" type="text" inputmode="numeric" data-k="aut.numero" placeholder="Sin puntos ni comas">
+      </div>
+    </div>
+    <div class="field">
+      <label class="input-label">Usted es el/la... <span class="req">*</span></label>
+      <div class="opt-group" data-opt="aut.calidad">
+        <button type="button" class="opt" data-val="PADRE"><span class="dot"></span><span class="ot"><b>Padre</b><span>Es el padre biológico del menor</span></span></button>
+        <button type="button" class="opt" data-val="MADRE"><span class="dot"></span><span class="ot"><b>Madre</b><span>Es la madre biológica del menor</span></span></button>
+        <button type="button" class="opt" data-val="TUTOR"><span class="dot"></span><span class="ot"><b>Tutor legal</b><span>Tiene resolución o sentencia de tutela</span></span></button>
+      </div>
+    </div>
+    <div class="grid-2">
+      <div class="field">
+        <label class="input-label">Celular <span class="req">*</span></label>
+        <input class="input-field" type="tel" inputmode="numeric" maxlength="10" data-k="aut.celular" placeholder="3001234567">
+      </div>
+      <div class="field">
+        <label class="input-label">Correo electrónico</label>
+        <input class="input-field" type="email" inputmode="email" data-k="aut.correo" placeholder="tucorreo@ejemplo.com">
+      </div>
+    </div>
+    <div class="field">
+      <label class="input-label">Dirección física <span class="req">*</span></label>
+      <input class="input-field" type="text" data-k="aut.direccion" placeholder="Ej: Calle 45 #23-10, Barranquilla">
+    </div>
+    <div class="grid-2">
+      <div class="field">
+        <label class="input-label">Sexo</label>
+        <select class="input-field" data-k="aut.sexo"><option value="">Prefiero no indicar</option><option>Hombre</option><option>Mujer</option><option>Intersexual</option></select>
+      </div>
+      <div class="field">
+        <label class="input-label">Género</label>
+        <select class="input-field" data-k="aut.genero"><option value="">Prefiero no indicar</option><option>Masculino</option><option>Femenino</option><option>Hombre transgénero</option><option>Mujer transgénero</option><option>Persona no binaria</option></select>
+      </div>
+    </div>
+
+    <hr class="divider">
+    <div class="docs-head">
+      <span class="t">Documento de quien autoriza</span>
+      <span class="info-wrap"><button type="button" class="info-i">i</button>
+        <div class="info-pop" hidden>Es <b>opcional</b>. Si adjuntas la foto del documento, sale en el PDF. Al entregar el permiso suelen pedirse los documentos de quien autoriza, del menor y del acompañante, así que tenerlos aquí te ahorra tiempo.</div>
+      </span>
+    </div>
+    <div class="docup" data-doc="aut.frente">
+      <div class="dh">Cara delantera <span class="opt-tag">Opcional</span></div>
+      <button type="button" class="drop"><span class="drop-ico"></span> Tomar foto o elegir de galería</button><input type="file" accept="image/*" hidden>
+      <div class="thumb"></div>
+    </div>
+    <div class="docup" data-doc="aut.reverso">
+      <div class="dh">Cara trasera <span class="opt-tag">Opcional</span></div>
+      <button type="button" class="drop"><span class="drop-ico"></span> Tomar foto o elegir de galería</button><input type="file" accept="image/*" hidden>
+      <div class="thumb"></div>
+    </div>
+
+    <div class="nav-row"><button type="button" class="btn-primary btn-block" data-next>Continuar</button></div>
+    <div class="hint err" data-errores></div>
+  </section>
+
+  <!-- ============ PASO 2 — Menor ============ -->
+  <section class="paso card" data-paso="2" hidden>
+    <div class="field">
+      <label class="input-label">Nombre completo del menor <span class="req">*</span></label>
+      <input class="input-field" type="text" data-k="menor.nombre" placeholder="Nombres y apellidos del menor">
+    </div>
+    <div class="grid-2">
+      <div class="field">
+        <label class="input-label">Tipo de documento <span class="req">*</span></label>
+        <select class="input-field" data-k="menor.tipoDoc"><option value="RC">Registro civil de nacimiento</option><option value="TI">Tarjeta de identidad</option><option value="OTRO">Otro</option></select>
+      </div>
+      <div class="field">
+        <label class="input-label">Número o serial <span class="req">*</span></label>
+        <input class="input-field" type="text" data-k="menor.numero" placeholder="Número o serial">
+      </div>
+    </div>
+
+    <div class="docs-head">
+      <span class="t">Documento del menor</span>
+      <span class="info-wrap"><button type="button" class="info-i">i</button>
+        <div class="info-pop" hidden>Opcional. Adjunta el documento del menor (registro civil o tarjeta de identidad) para que salga en el PDF; suele pedirse al momento del viaje.</div>
+      </span>
+    </div>
+    <div class="docup" data-doc="menor.frente">
+      <div class="dh">Cara delantera <span class="opt-tag">Opcional</span></div>
+      <button type="button" class="drop"><span class="drop-ico"></span> Tomar foto o elegir de galería</button><input type="file" accept="image/*" hidden>
+      <div class="thumb"></div>
+    </div>
+    <div class="docup" data-doc="menor.reverso">
+      <div class="dh">Cara trasera <span class="opt-tag">Opcional</span></div>
+      <button type="button" class="drop"><span class="drop-ico"></span> Tomar foto o elegir de galería</button><input type="file" accept="image/*" hidden>
+      <div class="thumb"></div>
+    </div>
+
+    <hr class="divider">
+    <button type="button" class="chk-line" data-chk="menor.discapacidad">
+      <span class="box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12l5 6L20 5"/></svg></span>
+      El menor tiene alguna discapacidad
+    </button>
+    <div data-if="menor.discapacidad=SI" hidden>
+      <div class="field" style="margin-top:12px">
+        <label class="input-label">Tipo de discapacidad</label>
+        <select class="input-field" data-k="menor.tipoDiscapacidad"><option value="">Seleccione...</option><option>Física</option><option>Visual</option><option>Cognitiva – intelectual</option><option>Auditiva</option><option>Mental – psicosocial</option><option>Múltiple</option></select>
+      </div>
+    </div>
+    <div style="height:10px"></div>
+    <button type="button" class="chk-line" data-chk="menor.etnia">
+      <span class="box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12l5 6L20 5"/></svg></span>
+      El menor pertenece a una comunidad étnica
+    </button>
+    <div data-if="menor.etnia=SI" hidden>
+      <div class="field" style="margin-top:12px">
+        <label class="input-label">Tipo de población étnica</label>
+        <select class="input-field" data-k="menor.tipoEtnia"><option value="">Seleccione...</option><option>Indígena</option><option>Gitano</option><option>Palenquero</option><option>Raizal</option><option>Otra</option></select>
+      </div>
+    </div>
+
+    <div class="nav-row"><button type="button" class="btn-secondary" data-prev>Atrás</button><button type="button" class="btn-primary" data-next>Continuar</button></div>
+    <div class="hint err" data-errores></div>
+  </section>
+
+  <!-- ============ PASO 3 — Viaje ============ -->
+  <section class="paso card" data-paso="3" hidden>
+    <div class="grid-2">
+      <div class="field">
+        <label class="input-label">Fecha del viaje <span class="req">*</span></label>
+        <input class="input-field" type="date" data-k="viaje.fecha">
+      </div>
+      <div class="field"></div>
+    </div>
+    <div class="grid-2">
+      <div class="field">
+        <label class="input-label">Ciudad de origen <span class="req">*</span></label>
+        <div class="combo" data-combo="viaje.origen"><div class="cin"><svg class="pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 10c0 7-9 12-9 12s-9-5-9-12a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><input class="input-field" type="text" autocomplete="off" placeholder="Ej: Medellín"></div></div>
+      </div>
+      <div class="field">
+        <label class="input-label">Ciudad de destino <span class="req">*</span></label>
+        <div class="combo" data-combo="viaje.destino"><div class="cin"><svg class="pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 10c0 7-9 12-9 12s-9-5-9-12a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><input class="input-field" type="text" autocomplete="off" placeholder="Ej: Bogotá D.C."></div></div>
+      </div>
+    </div>
+
+    <div class="field">
+      <label class="input-label">¿El menor viaja acompañado por un adulto? <span class="req">*</span></label>
+      <div class="yn" data-yn="viaje.acompanado"><button type="button" data-val="SI">Sí</button><button type="button" data-val="NO">No</button></div>
+      <p class="hint">Un adulto distinto al padre, madre o tutor que viaja junto al menor.</p>
+    </div>
+
+    <div class="field">
+      <label class="input-label" style="display:flex;align-items:center;gap:7px;line-height:1.4;">
+        ¿Habrá una persona autorizada para recibir al menor en la terminal de destino? <span class="req">*</span>
+        <span class="info-wrap"><button type="button" class="info-i">i</button>
+          <div class="info-pop" hidden>La empresa <b>no ofrece servicio de recogida</b>. Al llegar al destino, entrega al menor <b>únicamente a la persona que registres aquí</b>, tras verificar su documento, y no se responsabiliza del menor una vez entregado. Esa persona la designa la familia. Si nadie lo recibirá en la terminal, deja "No".</div>
+        </span>
+      </label>
+      <div class="yn" data-yn="viaje.recogido"><button type="button" data-val="SI">Sí</button><button type="button" data-val="NO">No</button></div>
+    </div>
+
+    <div class="nav-row"><button type="button" class="btn-secondary" data-prev>Atrás</button><button type="button" class="btn-primary" data-next>Continuar</button></div>
+    <div class="hint err" data-errores></div>
+  </section>
+
+  <!-- ============ PASO 4 — Acompañante y receptor ============ -->
+  <section class="paso card" data-paso="4" hidden>
+    <div data-if="viaje.acompanado=SI" hidden>
+      <div class="field-title">Persona autorizada para viajar con el menor</div>
+      <div class="field">
+        <label class="input-label">Nombre completo <span class="req">*</span></label>
+        <input class="input-field" type="text" data-k="acomp.nombre" placeholder="Nombres y apellidos">
+      </div>
+      <div class="grid-2">
+        <div class="field">
+          <label class="input-label">Tipo de documento</label>
+          <select class="input-field" data-k="acomp.tipoDoc"><option value="CC">Cédula de ciudadanía</option><option value="CE">Cédula de extranjería</option><option value="PA">Pasaporte</option><option value="PP">Permiso de permanencia</option></select>
+        </div>
+        <div class="field">
+          <label class="input-label">Número de identificación</label>
+          <input class="input-field" type="text" data-k="acomp.numero">
+        </div>
+      </div>
+      <div class="docs-head"><span class="t">Documento del acompañante</span>
+        <span class="info-wrap"><button type="button" class="info-i">i</button><div class="info-pop" hidden>Opcional. Con una sola cara del documento es suficiente. Sale en el PDF.</div></span>
+      </div>
+      <div class="docup" data-doc="acomp.doc">
+        <div class="dh">Documento (una cara) <span class="opt-tag">Opcional</span></div>
+        <button type="button" class="drop"><span class="drop-ico"></span> Tomar foto o elegir de galería</button><input type="file" accept="image/*" hidden>
+        <div class="thumb"></div>
+      </div>
+      <hr class="divider">
+    </div>
+
+    <div data-if="viaje.recogido=SI" hidden>
+      <div class="field-title">Persona autorizada para recoger al menor</div>
+      <div class="field">
+        <label class="input-label">Nombre completo <span class="req">*</span></label>
+        <input class="input-field" type="text" data-k="rec.nombre" placeholder="Nombres y apellidos">
+      </div>
+      <div class="grid-2">
+        <div class="field">
+          <label class="input-label">Tipo de documento</label>
+          <select class="input-field" data-k="rec.tipoDoc"><option value="CC">Cédula de ciudadanía</option><option value="CE">Cédula de extranjería</option><option value="PA">Pasaporte</option><option value="PP">Permiso de permanencia</option></select>
+        </div>
+        <div class="field">
+          <label class="input-label">Número de identificación</label>
+          <input class="input-field" type="text" data-k="rec.numero">
+        </div>
+      </div>
+      <div class="grid-2">
+        <div class="field"><label class="input-label">Número telefónico</label><input class="input-field" type="tel" inputmode="numeric" data-k="rec.celular"></div>
+        <div class="field"><label class="input-label">Correo electrónico</label><input class="input-field" type="email" data-k="rec.correo"></div>
+      </div>
+      <div class="field"><label class="input-label">Dirección física</label><input class="input-field" type="text" data-k="rec.direccion"></div>
+    </div>
+
+    <div id="paso4-vacio" class="alerta-info" hidden>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+      <div>El menor viaja solo y sin persona que lo reciba en la terminal. No se requieren datos adicionales; puedes continuar.</div>
+    </div>
+
+    <div class="nav-row"><button type="button" class="btn-secondary" data-prev>Atrás</button><button type="button" class="btn-primary" data-next>Continuar</button></div>
+    <div class="hint err" data-errores></div>
+  </section>
+
+  <!-- ============ PASO 5 — Firma ============ -->
+  <section class="paso card" data-paso="5" hidden>
+    <div class="field">
+      <label class="input-label">Firma de quien autoriza <span class="req">*</span></label>
+      <p class="hint" style="margin-top:0;margin-bottom:8px">Firme con el dedo (celular) o con el mouse. Aparecerá en el permiso.</p>
+      <div class="firma-wrap" id="firma-wrap">
+        <canvas id="firma-canvas"></canvas>
+        <div class="firma-base"></div>
+        <div class="firma-ph" id="firma-ph">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21s3-1 6-4 6-9 4-11-6 3-4 8 5 4 8 3 3-3 3-3"/></svg>
+          Firme aquí
+        </div>
+        <button type="button" class="firma-clear" id="firma-clear">Borrar</button>
+      </div>
+      <div class="firma-aviso">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L1 21h22L12 2zm0 6l6.5 11h-13L12 8zm-1 4v3h2v-3h-2zm0 4v2h2v-2h-2z"/></svg>
+        <div><b>Importante — lea antes de firmar.</b> Con su firma usted autoriza el viaje de un <b>menor de edad</b> y declara, bajo su responsabilidad, que los datos son veraces y que actúa en la calidad indicada (padre, madre o tutor legal). Esta firma tiene <b>validez legal</b> como firma electrónica (Decreto 2364 de 2012) y respalda la autorización conforme a la Ley 1098 de 2006. Firmar con información falsa o sin tener la facultad legal puede acarrear responsabilidad civil y penal.</div>
+      </div>
+    </div>
+    <div class="nav-row"><button type="button" class="btn-secondary" data-prev>Atrás</button><button type="button" class="btn-primary" data-next>Continuar</button></div>
+    <div class="hint err" data-errores></div>
+  </section>
+
+  <!-- ============ PASO 6 — Resumen ============ -->
+  <section class="paso card" data-paso="6" hidden>
+    <div class="field-title">Revise y descargue</div>
+    <div id="resumen"></div>
+    <div class="alerta-aviso" style="border-left:4px solid var(--orange,#D5703E);">
+      <div><b style="color:var(--orange,#D5703E);">Declaración.</b> Al generar este permiso declaro que la información aquí registrada es <b>verídica</b>. Este permiso será verificado por el agente de la empresa transportadora al momento de tomar el servicio.</div>
+    </div>
+    <div class="alerta-exito">
+      <img class="noguarda-ico" src="assets/no-guarda2.png?v=6" alt="No se guardan datos">
+      <div>Al descargar, el permiso se genera <b>en tu dispositivo</b> como PDF. No se envía ni se almacena nada.</div>
+    </div>
+    <div class="nav-row">
+      <button type="button" class="btn-secondary" data-prev>Atrás</button>
+      <button type="button" class="btn-primary" id="btn-pdf">Descargar permiso en PDF</button>
+    </div>
+  </section>
+
+  <p class="disclaimer" id="disclaimer">Este permiso será verificado por el agente de la empresa donde el usuario tome el servicio.</p>
+  <div class="wiz-foot">
+    Permiso Digital · Herramienta gratuita basada en el formato sugerido por la Superintendencia de Transporte (Circular Externa 20244000000557).<br>
+    Este sitio no recopila, almacena ni transmite datos personales.
+  </div>
+</div>
+
+<!-- ============ FORMATO OFICIAL (plantilla de salida, oculta) ============ -->
+<div id="salida-wrap" aria-hidden="true">
+  <div class="page" id="formato">
+    <h1>AUTORIZACIÓN DE VIAJE PARA NIÑOS, NIÑAS Y ADOLESCENTES</h1>
+    <p class="subtitle">No acompañados o que se desplacen en compañía de un adulto que no sea su padre, madre o tutor legal.</p>
+    <div class="card">
+      <div class="band">Datos del niño, niña o adolescente</div>
+      <div class="body" data-sec="menor">
+        <div class="field-row"><span>Nombre completo</span><input type="text"></div>
+        <div class="label-bold">Tipo de documento</div>
+        <div class="grid2">
+          <div class="cb"><input type="checkbox"><label>Registro civil de nacimiento</label></div>
+          <div class="cb-fill"><input type="checkbox"><label>Otro:</label><input type="text" class="cb-line"></div>
+          <div class="cb"><input type="checkbox"><label>Tarjeta de identidad</label></div>
+          <div class="cb-fill"><label>Número de identificación o serial</label><input type="text" class="cb-line"></div>
+        </div>
+        <div class="hr"></div>
+        <div class="q-orange">¿El menor de edad se encuentra en situación de discapacidad?</div>
+        <div class="grid2" style="max-width:280px;">
+          <div class="cb"><input type="checkbox"><label>Sí</label></div>
+          <div class="cb"><input type="checkbox"><label>No</label></div>
+        </div>
+        <div class="label-bold">Tipo de discapacidad</div>
+        <div class="grid2">
+          <div class="cb"><input type="checkbox"><label>Física</label></div>
+          <div class="cb"><input type="checkbox"><label>Visual</label></div>
+          <div class="cb"><input type="checkbox"><label>Cognitiva – intelectual</label></div>
+          <div class="cb"><input type="checkbox"><label>Auditiva</label></div>
+          <div class="cb"><input type="checkbox"><label>Mental – psicosocial</label></div>
+          <div class="cb"><input type="checkbox"><label>Múltiple</label></div>
+        </div>
+        <div class="hr"></div>
+        <div class="q-orange">¿Pertenece a alguna comunidad étnica?</div>
+        <div class="grid2" style="max-width:280px;">
+          <div class="cb"><input type="checkbox"><label>Sí</label></div>
+          <div class="cb"><input type="checkbox"><label>No</label></div>
+        </div>
+        <div class="label-bold">Tipo de población étnica pertenece</div>
+        <div class="grid2">
+          <div class="cb"><input type="checkbox"><label>Indígena</label></div>
+          <div class="cb"><input type="checkbox"><label>Gitano</label></div>
+          <div class="cb"><input type="checkbox"><label>Palenquero</label></div>
+          <div class="cb-fill"><input type="checkbox"><label>Otra</label><input type="text" class="cb-line"></div>
+          <div class="cb"><input type="checkbox"><label>Raizal</label></div>
+          <div></div>
+        </div>
+      </div>
+
+      <div class="band">Datos de quien otorga el permiso</div>
+      <div class="body" data-sec="autoriza">
+        <div class="field-row"><span>Nombre completo</span><input type="text"></div>
+        <div class="label-bold">Tipo de documento</div>
+        <div class="grid2">
+          <div class="cb"><input type="checkbox"><label>Cédula de ciudadanía</label></div>
+          <div class="cb"><input type="checkbox"><label>Pasaporte</label></div>
+          <div class="cb"><input type="checkbox"><label>Cédula de extranjería</label></div>
+          <div class="cb"><input type="checkbox"><label>Otro</label></div>
+          <div class="cb"><input type="checkbox"><label>Permiso de permanencia</label></div>
+          <div class="cb-fill"><label>Número de identificación</label><input type="text" class="cb-line"></div>
+        </div>
+        <div class="hr"></div>
+        <div class="q-orange">Calidad en que actúa (tipo de parentesco o tutoría legal)</div>
+        <div class="grid2">
+          <div class="stack">
+            <div class="cb"><input type="checkbox"><label>Padre</label></div>
+            <div class="cb"><input type="checkbox"><label>Madre</label></div>
+            <div class="cb"><input type="checkbox"><label>Tutor legal</label></div>
+          </div>
+          <div class="stack">
+            <div class="field-row"><span>Número telefónico</span><input type="text"></div>
+            <div class="field-row"><span>Correo electrónico</span><input type="text"></div>
+            <div class="field-row"><span>Dirección física</span><input type="text"></div>
+          </div>
+        </div>
+        <div class="hr"></div>
+        <div class="three-block">
+          <div>
+            <div class="q-orange">Sexo</div>
+            <div class="stack">
+              <div class="cb"><input type="checkbox"><label>Hombre</label></div>
+              <div class="cb"><input type="checkbox"><label>Mujer</label></div>
+              <div class="cb"><input type="checkbox"><label>Intersexual</label></div>
+              <div class="cb-fill"><input type="checkbox"><label>Otro</label><input type="text" class="cb-line"></div>
+            </div>
+          </div>
+          <div>
+            <div class="q-orange">Género</div>
+            <div class="stack">
+              <div class="cb"><input type="checkbox"><label>Masculino</label></div>
+              <div class="cb"><input type="checkbox"><label>Femenino</label></div>
+              <div class="cb"><input type="checkbox"><label>Hombre transgénero</label></div>
+              <div class="cb"><input type="checkbox"><label>Mujer transgénero</label></div>
+            </div>
+          </div>
+          <div>
+            <div class="q-orange">&nbsp;</div>
+            <div class="stack">
+              <div class="cb"><input type="checkbox"><label>Persona no binaria</label></div>
+              <div class="cb"><input type="checkbox"><label>Prefiero no decir</label></div>
+              <div class="cb-fill"><input type="checkbox"><label>Otro</label><input type="text" class="cb-line"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="band">Datos de la persona autorizada para viajar con el menor de edad</div>
+      <div class="body" data-sec="viajar">
+        <p class="note-text">Campo exclusivo para autorizaciones de viaje de niños, niñas o adolescentes acompañados por un adulto diferente al padre, madre o tutor legal.</p>
+        <div class="field-row"><span>Nombre completo</span><input type="text"></div>
+        <div class="label-bold">Tipo de documento</div>
+        <div class="grid2">
+          <div class="cb"><input type="checkbox"><label>Cédula de ciudadanía</label></div>
+          <div class="cb"><input type="checkbox"><label>Pasaporte</label></div>
+          <div class="cb"><input type="checkbox"><label>Cédula de extranjería</label></div>
+          <div class="cb"><input type="checkbox"><label>Otro</label></div>
+          <div class="cb"><input type="checkbox"><label>Permiso de permanencia</label></div>
+          <div class="cb-fill"><label>Número de identificación</label><input type="text" class="cb-line"></div>
+        </div>
+      </div>
+
+      <div class="band">Datos del viaje</div>
+      <div class="body" data-sec="viaje">
+        <div class="three-block">
+          <div class="field-row"><span>Fecha del viaje</span><input type="text"></div>
+          <div class="field-row"><span>Origen</span><input type="text"></div>
+          <div class="field-row"><span>Destino</span><input type="text"></div>
+        </div>
+      </div>
+
+      <div class="band">Datos de la persona autorizada para recoger al menor de edad</div>
+      <div class="body" data-sec="recoger">
+        <div class="field-row"><span>Nombre completo</span><input type="text"></div>
+        <div class="label-bold">Tipo de documento</div>
+        <div class="grid2">
+          <div class="cb"><input type="checkbox"><label>Cédula de ciudadanía</label></div>
+          <div class="cb"><input type="checkbox"><label>Pasaporte</label></div>
+          <div class="cb"><input type="checkbox"><label>Cédula de extranjería</label></div>
+          <div class="cb"><input type="checkbox"><label>Otro</label></div>
+          <div class="cb"><input type="checkbox"><label>Permiso de permanencia</label></div>
+          <div class="cb-fill"><label>Número de identificación</label><input type="text" class="cb-line"></div>
+        </div>
+        <div class="two-block" style="margin-top:2px;">
+          <div class="field-row"><span>Número telefónico</span><input type="text"></div>
+          <div class="field-row"><span>Correo electrónico</span><input type="text"></div>
+        </div>
+        <div class="field-row"><span>Dirección física</span><input type="text"></div>
+      </div>
+
+      <div class="band">Manifestación expresa de autorización del viaje de la niña, niño o adolescente</div>
+      <div class="body">
+        <div class="manifest-grid">
+          <div class="manifest-lines"><input type="text"><input type="text"><input type="text"></div>
+          <div class="firma-block firma-manifest">
+            <div class="firma-area" id="salida-firma"></div>
+            <span class="firma-label">Firma de quien autoriza</span>
+          </div>
+        </div>
+        <div class="anexos">
+          <span class="a-title">Anexos:</span>
+          <div>1. Copia del documento que pruebe el parentesco. 2. Copia del documento de identidad del mayor de edad al que se autoriza.</div>
+          <ul><li>Registro civil de nacimiento</li><li>Sentencia Judicial</li></ul>
+        </div>
+      </div>
+
+      <div class="band">Constancia de entrega del menor de edad a la persona autorizada</div>
+      <div class="body">
+        <p class="constancia-text">Una vez verificada la identidad de la persona autorizada para recibir el menor de edad en el lugar de destino, se le hace entrega formal, quién deja constancia de la recepción del niño, niña o adolescente con su firma.</p>
+        <div class="firma-row"><div class="firma-block"><div class="firma-area"></div><span class="firma-label">Firma de quien recibe</span></div></div>
+      </div>
+    </div>
+    <div class="watermark" id="watermark"></div>
+  </div>
+</div>
+
+<!-- Panel: cámara o galería -->
+<div class="sheet-ov" id="sheet-ov" hidden></div>
+<div class="sheet" id="doc-sheet" hidden role="dialog" aria-label="Agregar documento">
+  <div class="sheet-grab"></div>
+  <p class="sheet-title">Agregar documento</p>
+  <div class="sheet-box">
+    <button type="button" class="sheet-opt" data-cap="cam">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+      <span class="ot"><b>Tomar foto</b><small>Abrir la cámara ahora</small></span>
+      <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
+    </button>
+    <div class="sheet-sep"></div>
+    <button type="button" class="sheet-opt" data-cap="gal">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.6"/><path d="M21 15l-5-5L5 21"/></svg>
+      <span class="ot"><b>Elegir de galería</b><small>Fotos de tu dispositivo</small></span>
+      <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
+    </button>
+  </div>
+  <button type="button" class="sheet-cancel" id="sheet-cancel">Cancelar</button>
+</div>
+
+<!-- Cámara en la página -->
+<div class="cam-modal" id="cam-modal" hidden>
+  <div class="cam-top"><span>Documento — tomar foto</span><button type="button" id="cam-close" aria-label="Cerrar">&#10005;</button></div>
+  <div class="cam-stage">
+    <video id="cam-video" autoplay playsinline muted></video>
+    <div class="cam-guide"></div>
+    <p class="cam-hint">Ubica el documento dentro del marco, con buena luz y sin reflejos. Verifica que el texto se lea con claridad antes de capturar.</p>
+    <div class="cam-err" id="cam-err" hidden></div>
+  </div>
+  <div class="cam-bottom"><button type="button" class="cam-shot" id="cam-shot" aria-label="Capturar foto"></button></div>
+</div>
+
+<script src="vendor/html2canvas.min.js"></script>
+<script src="vendor/jspdf.umd.min.js"></script>
+<script src="assets/ciudades.js"></script>
+<script src="assets/logo-wm.js"></script>
+<script src="assets/app.js?v=15"></script>
+</body>
+</html>
