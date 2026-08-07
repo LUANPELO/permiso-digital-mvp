@@ -22,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Nunito+Sans:opsz,wght@6..12,400;6..12,600;6..12,700;6..12,800&family=Caveat:wght@500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/styles.css?v=13">
+<link rel="stylesheet" href="assets/styles.css?v=15">
 </head>
 <body>
 
@@ -91,7 +91,10 @@
     <div class="grid-2">
       <div class="field">
         <label class="input-label">Celular <span class="req">*</span></label>
-        <input class="input-field" type="tel" inputmode="numeric" maxlength="10" data-k="aut.celular" placeholder="3001234567">
+        <div class="tel-row">
+          <button type="button" class="tel-cc" data-cc="aut.indicativo" aria-label="Indicativo telefónico"><img class="flag" src="assets/flags/co.png" srcset="assets/flags/co-2x.png 2x" alt="Colombia"><span class="cc-code">+57</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></button>
+          <input class="input-field" type="tel" inputmode="numeric" maxlength="13" data-k="aut.celular" placeholder="3001234567">
+        </div>
       </div>
       <div class="field">
         <label class="input-label">Correo electrónico</label>
@@ -282,7 +285,7 @@
         </div>
       </div>
       <div class="grid-2">
-        <div class="field"><label class="input-label">Número telefónico</label><input class="input-field" type="tel" inputmode="numeric" data-k="rec.celular"></div>
+        <div class="field"><label class="input-label">Número telefónico</label><div class="tel-row"><button type="button" class="tel-cc" data-cc="rec.indicativo" aria-label="Indicativo telefónico"><img class="flag" src="assets/flags/co.png" srcset="assets/flags/co-2x.png 2x" alt="Colombia"><span class="cc-code">+57</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></button><input class="input-field" type="tel" inputmode="numeric" maxlength="13" data-k="rec.celular"></div></div>
         <div class="field"><label class="input-label">Correo electrónico</label><input class="input-field" type="email" data-k="rec.correo"></div>
       </div>
       <div class="field"><label class="input-label">Dirección física</label><input class="input-field" type="text" data-k="rec.direccion"></div>
@@ -543,13 +546,26 @@
   <button type="button" class="sheet-cancel" id="sheet-cancel">Cancelar</button>
 </div>
 
+<!-- Selector de indicativo -->
+<div class="cc-sheet" id="cc-sheet" hidden role="dialog" aria-label="Indicativo telefónico">
+  <div class="cc-panel">
+    <div class="cc-grab"></div>
+    <div class="cc-head"><span>Indicativo telefónico</span><button type="button" id="cc-close" aria-label="Cerrar">&#10005;</button></div>
+    <div class="cc-search">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+      <input type="text" id="cc-buscar" placeholder="Buscar país o código…" autocomplete="off">
+    </div>
+    <div class="cc-list" id="cc-list"></div>
+  </div>
+</div>
+
 <!-- Cámara en la página -->
 <div class="cam-modal" id="cam-modal" hidden>
   <div class="cam-top"><span>Documento — tomar foto</span><button type="button" id="cam-close" aria-label="Cerrar">&#10005;</button></div>
   <div class="cam-stage">
     <video id="cam-video" autoplay playsinline muted></video>
     <div class="cam-guide"></div>
-    <p class="cam-hint">Ubica el documento dentro del marco, con buena luz y sin reflejos. Verifica que el texto se lea con claridad antes de capturar.</p>
+    <p class="cam-hint">Coloca el documento <b>en horizontal</b> dentro del marco, con buena luz y sin reflejos. Verifica que el texto se lea con claridad antes de capturar.</p>
     <div class="cam-err" id="cam-err" hidden></div>
   </div>
   <div class="cam-bottom"><button type="button" class="cam-shot" id="cam-shot" aria-label="Capturar foto"></button></div>
@@ -559,6 +575,6 @@
 <script src="vendor/jspdf.umd.min.js"></script>
 <script src="assets/ciudades.js"></script>
 <script src="assets/logo-wm.js"></script>
-<script src="assets/app.js?v=20"></script>
+<script src="assets/app.js?v=22"></script>
 </body>
 </html>
